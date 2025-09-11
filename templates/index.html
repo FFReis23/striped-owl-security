@@ -77,7 +77,22 @@
         </div>
         <canvas id="statsChart" style="max-width:500px; margin:auto;"></canvas>
     </div>
+    <!-- Seção de Ataques ou Informações -->
+<div class="attack-info">
+    <h3>Principais ataques e ameaças (OWASP)</h3>
+    <ul>
+        <li><strong>Phishing:</strong> Tentativas de enganar o usuário para revelar informações confidenciais.</li>
+        <li><strong>Malware:</strong> Programas maliciosos que danificam sistemas ou roubam dados.</li>
+        <li><strong>Ransomware:</strong> Sequestra arquivos e pede resgate em criptomoedas.</li>
+        <li><strong>SQL Injection:</strong> Ataque a bancos de dados via inserção de comandos maliciosos.</li>
+        <li><strong>Cross-Site Scripting (XSS):</strong> Injeção de scripts maliciosos em sites confiáveis.</li>
+        <li><strong>DoS/DDoS:</strong> Ataques para derrubar serviços tornando-os indisponíveis.</li>
+    </ul>
+    <p>Fonte: <a href="https://owasp.org/www-project-top-ten/" target="_blank">OWASP Top 10</a></p>
 
+    <!-- Botão Saiba Mais -->
+    <p><a href="{{ url_for('ataques') }}" target="_blank" class="btn btn-info">Saiba mais</a></p>
+</div>
     <!-- Seção Doações -->
     <div class="donation-section">
         <h4>Apoie o Striped Owl Security</h4>

@@ -113,6 +113,10 @@ def is_suspicious(url):
 
     return result_text
 
+@app.route("/ataques")
+def ataques():
+    return render_template("ataques.html")
+
 # Rota principal
 @app.route("/", methods=["GET", "POST"])
 def index():
