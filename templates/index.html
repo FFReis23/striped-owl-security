@@ -64,50 +64,76 @@
     <h3 class="logo-color">Últimas Varreduras</h3>
     <p class="logo-color">Última atualização: {{ last_update }}</p>
 
-    <table style="width:100%; border-collapse:collapse; text-align:center; font-size:14px;">
+    <table class="scan-table">
         <thead>
-            <tr style="background:#f2f2f2;">
-                <th style="padding:8px;">URL</th>
-                <th>Idade</th>
-                <th>Tamanho</th>
-                <th>Requests</th>
-                <th>IPs</th>
-                <th>Domínios</th>
+            <tr>
+                <th>Domínio</th>
+                <th>IP</th>
+                <th>Horário</th>
             </tr>
         </thead>
         <tbody>
             {% for scan in scans %}
-            <tr style="border-bottom:1px solid #ddd;">
-                <td style="padding:6px; text-align:left; color:#007BFF;">
-                    <a href="{{ scan.url }}" target="_blank">{{ scan.url }}</a>
+            <tr>
+                <td>
+                    <a href="http://{{ scan.domain }}" target="_blank" class="logo-color">{{ scan.domain }}</a>
                 </td>
-                <td>{{ scan.age }}</td>
-                <td>{{ scan.size }}</td>
-                <td>{{ scan.requests }}</td>
-                <td>{{ scan.ips }}</td>
-                <td>{{ scan.domains }}</td>
+                <td>{{ scan.ip }}</td>
+                <td>{{ scan.timestamp }}</td>
             </tr>
             {% endfor %}
-        </tbody>
+            </tbody>
     </table>
 </div>
-    <div class="attack-info" style="text-align:center; margin:40px 0;">
-    <h2 class="logo-color">Principais ataques e ameaças (OWASP)</h2>
-    <p class="logo-color">Fonte:
-        <a href="https://owasp.org/www-project-top-ten/" target="_blank" class="logo-color">OWASP Top 10</a>
-    </p>
-        <!-- Botão Saiba Mais -->
-    <p><a href="{{ url_for('ataques') }}" target="_blank" class="btn btn-info">Saiba mais</a></p>
-</div>
-<!-- CSS no <style> da index.html -->
+
 <style>
-.logo-color {
-    color: #00bcd4; /* Azul do logo Striped Owl Security */
-    text-decoration: none; /* Remove sublinhado do link */
+/* Estilos para a tabela de varreduras */
+.scan-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 14px;
+    background-color: #0a1f33; /* Fundo bem escuro */
+    color: #ffffff;             /* Texto branco */
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 20px;
 }
 
-.logo-color:hover {
-    text-decoration: underline; /* Subtilmente sublinha ao passar o mouse */
+.scan-table thead tr {
+    background-color: #0c2a50; /* Cabeçalho azul escuro */
+}
+
+.scan-table th,
+.scan-table td {
+    padding: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Estilo para linhas pares (striped effect) */
+.scan-table tbody tr:nth-child(even) {
+    background-color: #123456; /* Um tom um pouco mais claro para as linhas pares */
+}
+
+/* Estilo para links */
+.scan-table a {
+    color: #00bfff; /* Links azul claro */
+    text-decoration: none;
+}
+
+.scan-table a:hover {
+    text-decoration: underline;
+}
+
+/* Efeito de hover nas linhas */
+.scan-table tr:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    cursor: pointer;
+}
+
+/* Estilo para títulos e texto de logo */
+.logo-color {
+    color: #00bfff; /* Azul do logo */
 }
 </style>
 </div>
