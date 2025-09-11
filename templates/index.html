@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Striped Owl Security</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body { background-color: #003366; color: white; font-family: Arial, sans-serif; padding-top: 40px; }
+        .hero-section { text-align: center; margin-bottom: 20px; }
+        .hero-section img { max-width: 180px; }
+        .hero-section p { font-size: 0.8rem; color: #c0c0c0; margin-top: 10px; }
+        .form-container { text-align: center; background-color: #002233; padding: 25px; border-radius: 10px; max-width: 500px; margin: 0 auto 20px auto; }
+        .form-container input { width: 80%; padding: 8px; margin-top: 10px; border-radius: 0.25rem; border: 2px solid #00bcd4; background-color: #003366; color: white; font-size: 0.9rem; }
+        .form-container button { margin-top: 15px; padding: 8px 20px; background-color: #00bcd4; border: none; border-radius: 0.25rem; color: white; font-size: 0.9rem; cursor: pointer; }
+        .form-container button:hover { background-color: #008c99; }
+        .result-box { margin-top: 20px; text-align: center; white-space: pre-line; }
+        .dashboard { max-width: 600px; margin: 30px auto; background-color: #002233; padding: 20px; border-radius: 10px; }
+        .dashboard h3 { color: #00bcd4; text-align: center; margin-bottom: 20px; font-weight: 600; }
+        .stats-icons { display: flex; justify-content: space-around; margin-bottom: 20px; }
+        .stats-icons div { text-align: center; }
+        .stats-icons i { font-size: 2rem; display: block; margin-bottom: 5px; color: #00bcd4; }
+        .stats-icons span { color: #00bcd4; font-weight: 500; }
+        .footer-text { text-align: center; margin-top: 30px; font-size: 0.75rem; color: #b0b0b0; }
+        .donation-section { max-width: 600px; margin: 40px auto; background-color: #002233; padding: 25px; border-radius: 10px; text-align:center; }
+        .donation-section h4 { color:#00bcd4; font-weight:600; }
+        .donation-section p { color:#c0c0c0; font-size:0.9rem; }
+        .donation-buttons { display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin-top:15px; }
+        .donation-buttons form, .donation-buttons .pix-box { display:inline-block; }
+        .donation-buttons button { background-color:#00bcd4; color:white; border:none; padding:10px 20px; border-radius:5px; cursor:pointer; font-size:1rem; }
+        .donation-buttons button:hover { background-color:#008c99; }
+        .pix-box { background-color:#003366; border:2px solid #00bcd4; border-radius:5px; padding:10px 20px; color:white; font-size:1rem; text-align:center; }
+        .pix-box img { max-width:120px; display:block; margin:10px auto 0 auto; }
+    </style>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div class="container">
+    <!-- Hero -->
+    <div class="hero-section">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+        <p>Analise arquivos, domínios, IPs e URLs suspeitos para detectar malware e outras violações e compartilhe-os.</p>
+    </div>
+
+    <!-- Formulário -->
+    <div class="form-container">
+        <form method="POST">
+            <input type="text" id="url" name="url" placeholder="Digite a URL ou IP para verificar" required>
+            <button type="submit">Verificar</button>
+        </form>
+    </div>
+
+    <!-- Resultado -->
+    {% if result %}
+    <div class="result-box alert alert-info">
+        <p>{{ result }}</p>
+    </div>
+    {% endif %}
+
+    <!-- Dashboard Estatísticas -->
+    <div class="dashboard">
+        <h3>Estatísticas de Links</h3>
+        <div class="stats-icons">
+            <div>
+                <i class="fas fa-check-circle"></i>
+                <span>Seguros: {{ stats.safe }}</span>
+            </div>
+            <div>
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>Suspeitos: {{ stats.suspicious }}</span>
+            </div>
+            <div>
+                <i class="fas fa-times-circle"></i>
+                <span>Maliciosos: {{ stats.malicious }}</span>
+            </div>
+        </div>
+        <canvas id="statsChart" style="max-width:500px; margin:auto;"></canvas>
+    </div>
+
+    <!-- Seção Doações -->
+    <div class="donation-section">
+        <h4>Apoie o Striped Owl Security</h4>
+        <p>Ajude a manter este site online e atualizado.</p>
+        <div class="donation-buttons">
+            <!-- PayPal -->
+            <form action="https://www.paypal.com/donate" method="post" target="_blank">
+                <input type="hidden" name="business" value="machshevreis@mailfence.com">
+                <input type="hidden" name="currency_code" value="BRL">
+                <button type="submit">Doar com PayPal</button>
+            </form>
+
+            <!-- Pix -->
+            <div class="pix-box">
+                <p>Doação via Pix - Mercado Pago</p>
+                <p>Chave Pix E-mail machshevreis@mailfence.com </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-text">
+        <p>© 2025 Striped Owl Security. Todos os direitos reservados.</p>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const ctx = document.getElementById('statsChart').getContext('2d');
+const statsChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Seguros', 'Suspeitos', 'Maliciosos'],
+        datasets: [{
+            label: 'Links Analisados',
+            data: [{{ stats.safe }}, {{ stats.suspicious }}, {{ stats.malicious }}],
+            backgroundColor: ['rgba(0, 188, 212, 0.7)','rgba(0, 188, 212, 0.7)','rgba(0, 188, 212, 0.7)'],
+            borderColor: ['rgba(0, 188, 212, 1)','rgba(0, 188, 212, 1)','rgba(0, 188, 212, 1)'],
+            borderWidth: 1
+        }]
+    },
+    options: { responsive: true, plugins: { legend: { display: false }, tooltip: { enabled: true } }, scales: { y: { beginAtZero: true, stepSize: 1 } } }
+});
+</script>
+
+</body>
+</html>
