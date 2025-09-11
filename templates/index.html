@@ -59,24 +59,38 @@
     {% endif %}
 
     <!-- Dashboard Estatísticas -->
-    <div class="dashboard">
-        <h3>Estatísticas de Links</h3>
-        <div class="stats-icons">
-            <div>
-                <i class="fas fa-check-circle"></i>
-                <span>Seguros: {{ stats.safe }}</span>
-            </div>
-            <div>
-                <i class="fas fa-exclamation-triangle"></i>
-                <span>Suspeitos: {{ stats.suspicious }}</span>
-            </div>
-            <div>
-                <i class="fas fa-times-circle"></i>
-                <span>Maliciosos: {{ stats.malicious }}</span>
-            </div>
-        </div>
-        <canvas id="statsChart" style="max-width:500px; margin:auto;"></canvas>
-    </div>
+    <!-- Últimas Varreduras -->
+<div class="last-scans" style="margin:40px 0;">
+    <h3 class="logo-color">Últimas Varreduras</h3>
+    <p class="logo-color">Última atualização: {{ last_update }}</p>
+
+    <table style="width:100%; border-collapse:collapse; text-align:center; font-size:14px;">
+        <thead>
+            <tr style="background:#f2f2f2;">
+                <th style="padding:8px;">URL</th>
+                <th>Idade</th>
+                <th>Tamanho</th>
+                <th>Requests</th>
+                <th>IPs</th>
+                <th>Domínios</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for scan in scans %}
+            <tr style="border-bottom:1px solid #ddd;">
+                <td style="padding:6px; text-align:left; color:#007BFF;">
+                    <a href="{{ scan.url }}" target="_blank">{{ scan.url }}</a>
+                </td>
+                <td>{{ scan.age }}</td>
+                <td>{{ scan.size }}</td>
+                <td>{{ scan.requests }}</td>
+                <td>{{ scan.ips }}</td>
+                <td>{{ scan.domains }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
     <div class="attack-info" style="text-align:center; margin:40px 0;">
     <h2 class="logo-color">Principais ataques e ameaças (OWASP)</h2>
     <p class="logo-color">Fonte:
