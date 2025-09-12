@@ -7,58 +7,30 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
         body { background-color: #003366; color: white; font-family: Arial, sans-serif; padding-top: 40px; }
-
-        /* Hero */
         .hero-section { text-align: center; margin-bottom: 20px; }
         .hero-section img { max-width: 180px; }
         .hero-section p { font-size: 0.8rem; color: #c0c0c0; margin-top: 10px; }
-        .hero-section .logo-title {
-            color: #00bfff;
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: 1.2rem;
-        }
-
-        /* Formulário */
-        .form-container { text-align: center; background-color: #002233; padding: 25px; border-radius: 10px; max-width: 500px; margin: 0 auto 20px auto; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+        .form-container { text-align: center; background-color: #002233; padding: 25px; border-radius: 10px; max-width: 500px; margin: 0 auto 20px auto; }
         .form-container input { width: 80%; padding: 8px; margin-top: 10px; border-radius: 0.25rem; border: 2px solid #00bcd4; background-color: #003366; color: white; font-size: 0.9rem; }
-        .form-container button { margin-top: 15px; padding: 8px 20px; background-color: #00bcd4; border: none; border-radius: 0.25rem; color: white; font-size: 0.9rem; cursor: pointer; transition: background-color 0.3s ease; }
+        .form-container button { margin-top: 15px; padding: 8px 20px; background-color: #00bcd4; border: none; border-radius: 0.25rem; color: white; font-size: 0.9rem; cursor: pointer; }
         .form-container button:hover { background-color: #008c99; }
-
-        /* Resultado */
         .result-box { margin-top: 20px; text-align: center; white-space: pre-line; }
-
-        /* Dashboard */
-        .dashboard { max-width: 600px; margin: 30px auto; background-color: #002233; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+        .dashboard { max-width: 600px; margin: 30px auto; background-color: #002233; padding: 20px; border-radius: 10px; }
         .dashboard h3 { color: #00bcd4; text-align: center; margin-bottom: 20px; font-weight: 600; }
         .stats-icons { display: flex; justify-content: space-around; margin-bottom: 20px; }
         .stats-icons div { text-align: center; }
         .stats-icons i { font-size: 2rem; display: block; margin-bottom: 5px; color: #00bcd4; }
         .stats-icons span { color: #00bcd4; font-weight: 500; }
-
-        /* Últimas Varreduras / Tabela */
-        .scan-table { width: 100%; border-collapse: collapse; text-align: center; font-size: 14px; background-color: #0a1f33; color: #ffffff; border-radius: 8px; overflow: hidden; margin-top: 20px; display: block; overflow-x: auto; white-space: nowrap; }
-        .scan-table thead tr { background-color: #004080; }
-        .scan-table th, .scan-table td { padding: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
-        .scan-table tbody tr:nth-child(even) { background-color: #0059b3; }
-        .scan-table a { color: #00bfff; text-decoration: none; }
-        .scan-table a:hover { text-decoration: underline; }
-        .scan-table tr:hover { background-color: rgba(255, 255, 255, 0.15); cursor: pointer; }
-        .logo-color { color: #00bfff; }
-
-        /* Doações */
-        .donation-section { max-width: 600px; margin: 40px auto; background-color: #002233; padding: 25px; border-radius: 10px; text-align:center; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+        .footer-text { text-align: center; margin-top: 30px; font-size: 0.75rem; color: #b0b0b0; }
+        .donation-section { max-width: 600px; margin: 40px auto; background-color: #002233; padding: 25px; border-radius: 10px; text-align:center; }
         .donation-section h4 { color:#00bcd4; font-weight:600; }
         .donation-section p { color:#c0c0c0; font-size:0.9rem; }
         .donation-buttons { display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin-top:15px; }
         .donation-buttons form, .donation-buttons .pix-box { display:inline-block; }
-        .donation-buttons button { background-color:#00bcd4; color:white; border:none; padding:10px 20px; border-radius:5px; cursor:pointer; font-size:1rem; transition: background-color 0.3s ease; }
+        .donation-buttons button { background-color:#00bcd4; color:white; border:none; padding:10px 20px; border-radius:5px; cursor:pointer; font-size:1rem; }
         .donation-buttons button:hover { background-color:#008c99; }
         .pix-box { background-color:#003366; border:2px solid #00bcd4; border-radius:5px; padding:10px 20px; color:white; font-size:1rem; text-align:center; }
         .pix-box img { max-width:120px; display:block; margin:10px auto 0 auto; }
-
-        /* Footer */
-        .footer-text { text-align: center; margin-top: 30px; font-size: 0.75rem; color: #b0b0b0; }
     </style>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
@@ -68,7 +40,9 @@
     <!-- Hero -->
     <div class="hero-section">
         <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
-        <p class="logo-title">STRIPED OWL SECURITY</p>
+    <p style="color: #00bfff; font-weight: bold; text-transform: uppercase;">
+    STRIPED OWL SECURITY
+    </p>
         <p>Analise domínios, IPs e URLs suspeitos para detectar malware e outras violações e compartilhe-os.</p>
     </div>
 
@@ -88,36 +62,84 @@
     {% endif %}
 
     <!-- Dashboard Estatísticas -->
-    <div class="dashboard">
-        <h3>Estatísticas de Varreduras</h3>
-        <canvas id="statsChart" width="400" height="200"></canvas>
-    </div>
-
     <!-- Últimas Varreduras -->
-    <div class="last-scans" style="margin:40px 0;">
-        <h3 class="logo-color">Últimas Varreduras</h3>
-        <p class="logo-color">Última atualização: {{ last_update }}</p>
+<div class="last-scans" style="margin:40px 0;">
+    <h3 class="logo-color">Últimas Varreduras</h3>
+    <p class="logo-color">Última atualização: {{ last_update }}</p>
 
-        <table class="scan-table">
-            <thead>
-                <tr>
-                    <th>Domínio</th>
-                    <th>IP</th>
-                    <th>Horário</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for scan in scans %}
-                <tr>
-                    <td><a href="http://{{ scan.domain }}" target="_blank" class="logo-color">{{ scan.domain }}</a></td>
-                    <td>{{ scan.ip }}</td>
-                    <td>{{ scan.timestamp }}</td>
-                </tr>
-                {% endfor %}
+    <table class="scan-table">
+        <thead>
+            <tr>
+                <th>Domínio</th>
+                <th>IP</th>
+                <th>Horário</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for scan in scans %}
+            <tr>
+                <td>
+                    <a href="http://{{ scan.domain }}" target="_blank" class="logo-color">{{ scan.domain }}</a>
+                </td>
+                <td>{{ scan.ip }}</td>
+                <td>{{ scan.timestamp }}</td>
+            </tr>
+            {% endfor %}
             </tbody>
-        </table>
-    </div>
+    </table>
+</div>
 
+<style>
+/* Estilos para a tabela de varreduras */
+.scan-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 14px;
+    background-color: #0a1f33; /* Fundo bem escuro */
+    color: #ffffff;             /* Texto branco */
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.scan-table thead tr {
+    background-color: #0c2a50; /* Cabeçalho azul escuro */
+}
+
+.scan-table th,
+.scan-table td {
+    padding: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Estilo para linhas pares (striped effect) */
+.scan-table tbody tr:nth-child(even) {
+    background-color: #123456; /* Um tom um pouco mais claro para as linhas pares */
+}
+
+/* Estilo para links */
+.scan-table a {
+    color: #00bfff; /* Links azul claro */
+    text-decoration: none;
+}
+
+.scan-table a:hover {
+    text-decoration: underline;
+}
+
+/* Efeito de hover nas linhas */
+.scan-table tr:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    cursor: pointer;
+}
+
+/* Estilo para títulos e texto de logo */
+.logo-color {
+    color: #00bfff; /* Azul do logo */
+}
+</style>
+</div>
     <!-- Seção Doações -->
     <div class="donation-section">
         <h4>Apoie o Striped Owl Security</h4>
@@ -138,7 +160,6 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <div class="footer-text">
         <p>© 2025 Striped Owl Security. Todos os direitos reservados.</p>
     </div>
@@ -147,6 +168,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script>
 const ctx = document.getElementById('statsChart').getContext('2d');
 const statsChart = new Chart(ctx, {
